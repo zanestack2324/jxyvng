@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jx Yvng — Official</title>
+  <meta name="description" content="Jx Yvng — Emotional Rap artist from Warri, Nigeria. Stream Broken In My Prime and more on Spotify & Apple Music.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="FACELESS.jpeg" fetchpriority="high">
@@ -274,12 +275,12 @@
       text-shadow: 0 0 40px rgba(255,255,255,0.04);
     }
     .section-title::after {
-      content: '✧';
+      content: '';
       display: block;
-      font-size: 1rem;
-      color: #666;
-      margin-top: 14px;
-      letter-spacing: 0;
+      height: 1px;
+      width: 40px;
+      background: rgba(255,255,255,0.08);
+      margin: 14px auto 0;
     }
 
     .bio {
@@ -445,6 +446,140 @@
     .spotify-wrap:hover {
       transform: scale(1.02);
       box-shadow: 0 0 70px rgba(255,255,255,0.03);
+    }
+
+    .announcement {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .announcement-card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 50px 55px;
+      text-align: center;
+    }
+    .announcement-card p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #aaa;
+      margin-bottom: 18px;
+    }
+    .announcement-card p strong {
+      color: #fff;
+      font-family: 'Cinzel Decorative', serif;
+      letter-spacing: 2px;
+    }
+    .announcement-card .signoff-line {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+    .announcement-card .signature {
+      font-family: 'Cinzel Decorative', serif;
+      color: #fff;
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+    }
+    .announcement-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .announcement-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Nosifer', serif;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      padding: 10px 24px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.3s;
+      text-transform: uppercase;
+    }
+    .announcement-links a:hover {
+      color: #fff;
+      border-color: rgba(255,255,255,0.2);
+      transform: scale(1.04);
+      text-shadow: 0 0 10px rgba(255,100,0,0.6), 0 0 30px rgba(255,50,0,0.4);
+    }
+    .announcement-links a svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .fan-section {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .fan-card {
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .fan-card p {
+      color: #888;
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .fan-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .fan-form input {
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #d4d4d4;
+      font-family: 'MedievalSharp', serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.3s;
+    }
+    .fan-form input:focus {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+    }
+    .fan-form input::placeholder {
+      color: #555;
+    }
+    .fan-form button {
+      padding: 14px;
+      background: #fff;
+      color: #0a0a0a;
+      border: none;
+      font-family: 'Nosifer', serif;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: uppercase;
+    }
+    .fan-form button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(255,255,255,0.05);
+    }
+    .fan-status {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      min-height: 1.4em;
+    }
+    .fan-status.success { color: #8bc34a; }
+    .fan-status.error { color: #ef5350; }
+    .fan-count {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #555;
+      letter-spacing: 2px;
     }
 
     .gallery {
@@ -803,6 +938,32 @@
     </div>
   </section>
 
+  <section class="announcement" id="announcement">
+    <div class="container">
+      <h2 class="section-title reveal">A Note from Jx Yvng</h2>
+      <div class="announcement-card reveal">
+        <p>To everyone who's supported me so far,</p>
+        <p>I've made the decision to step away from music releases until 2027.</p>
+        <p>School has demanded a lot of my attention lately, and while you've already noticed me posting less frequently, I've realized it's time to fully focus on growth and preparation for what's next.</p>
+        <p>This break isn't the end — it's the beginning of something bigger.</p>
+        <p><strong>2027 will mark a new chapter for Jx Yvng.</strong> New vision. New energy. New level.</p>
+        <p>Until then, my music will remain available on Spotify and Apple Music. Keep streaming, and thank you for being part of this journey.</p>
+        <p class="signoff-line">See you on the other side. 🖤✨🌹</p>
+        <p class="signature">— Jx Yvng</p>
+        <div class="announcement-links">
+          <a href="https://open.spotify.com/artist/3ELdsqqawdByWKMF92AHPd" target="_blank" onclick="playClick()">
+            <svg viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            Spotify
+          </a>
+          <a href="https://music.apple.com/zm/artist/jx-yvng/1792371256" target="_blank" onclick="playClick()">
+            <svg viewBox="0 0 24 24" fill="url(#appleGrad3)"><defs><linearGradient id="appleGrad3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fb5c74"/><stop offset="100%" stop-color="#fa233b"/></linearGradient></defs><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.08 16.68c-.24.36-.48.72-.78 1.08-.42.48-.84.96-1.56 1.02-.72.06-1.02-.42-1.62-.42-.6 0-.96.42-1.56.48-.6.06-1.08-.36-1.5-.84-.78-.9-1.38-1.98-1.56-3.24-.18-1.14-.06-2.28.36-3.3.36-.9.96-1.68 1.74-2.16.66-.42 1.38-.66 2.1-.66.66 0 1.26.3 1.86.3.54 0 1.44-.36 2.4-.3.42 0 .84.12 1.2.36-.3.24-.54.54-.72.9-.24.48-.36 1.02-.3 1.56.06.78.36 1.5.84 2.1.42.48.96.9 1.56 1.2-.18.54-.42 1.08-.78 1.56z"/></svg>
+            Apple Music
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="gallery" id="gallery">
     <div class="container">
       <h2 class="section-title reveal">Gallery</h2>
@@ -813,6 +974,22 @@
         <img src="DARK MIC YX.jpeg" alt="Dark Mic" class="reveal-scale" data-parallax="-0.05" loading="lazy">
         <img src="LOVE ME LIKE ILY.jpeg" alt="Love Me Like ILY" class="reveal-scale" data-parallax="0.04" loading="lazy">
         <img src="ROCAFELLA.jpeg" alt="Rocafella" class="reveal-scale" data-parallax="-0.06" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="fan-section" id="join">
+    <div class="container">
+      <h2 class="section-title reveal">Join the JXEEZ</h2>
+      <div class="fan-card reveal">
+        <p>Drop your number to stay connected. No spam — just updates on new music, drops, and everything Jx Yvng.</p>
+        <form class="fan-form" id="fanForm">
+          <input type="text" id="fanName" placeholder="Your name" required autocomplete="name">
+          <input type="tel" id="fanPhone" placeholder="Phone number" required autocomplete="tel">
+          <button type="submit">Join</button>
+        </form>
+        <p class="fan-status" id="fanStatus"></p>
+        <div class="fan-count" id="fanCount"></div>
       </div>
     </div>
   </section>
@@ -926,6 +1103,47 @@
         o.observe(el);
       } else {
         window.addEventListener('scroll', updateParallax, { passive: true });
+      }
+    });
+
+    const fanForm = document.getElementById('fanForm');
+    const fanStatus = document.getElementById('fanStatus');
+    const fanCount = document.getElementById('fanCount');
+
+    async function updateFanCount() {
+      try {
+        const r = await fetch('/api/fans');
+        const d = await r.json();
+        fanCount.textContent = d.count > 0 ? `${d.count} JXEEZ joined` : '';
+      } catch {}
+    }
+    updateFanCount();
+
+    fanForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('fanName').value.trim();
+      const phone = document.getElementById('fanPhone').value.trim();
+      fanStatus.className = 'fan-status';
+      fanStatus.textContent = 'Joining...';
+      try {
+        const r = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone })
+        });
+        const d = await r.json();
+        if (d.success) {
+          fanStatus.className = 'fan-status success';
+          fanStatus.textContent = 'You\'re in. Welcome to the JXEEZ.';
+          fanForm.reset();
+          updateFanCount();
+        } else {
+          fanStatus.className = 'fan-status error';
+          fanStatus.textContent = d.error || 'Something went wrong.';
+        }
+      } catch {
+        fanStatus.className = 'fan-status error';
+        fanStatus.textContent = 'Could not connect. Try again.';
       }
     });
   </script>

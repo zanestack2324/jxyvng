@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jx Yvng — The Story</title>
+  <meta name="description" content="The story of Jx Yvng — Emotional Rap artist from Warri, Nigeria. Discover the journey behind the music.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="FACELESS.jpeg" fetchpriority="high">
@@ -202,7 +203,7 @@
       letter-spacing: 3px;
       margin-top: 10px;
     }
-    .story-body .quote {
+    .story-body     .quote {
       text-align: center;
       font-style: italic;
       color: #777;
@@ -211,6 +212,69 @@
       border-top: 1px solid rgba(255,255,255,0.04);
       padding-top: 25px;
       margin-top: 10px;
+    }
+
+    .fan-section {
+      position: relative;
+      z-index: 2;
+      padding: 80px 40px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .fan-section .container { max-width: 1200px; margin: 0 auto; }
+    .fan-card {
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .fan-card p {
+      color: #888;
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .fan-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .fan-form input {
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #d4d4d4;
+      font-family: 'MedievalSharp', serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.3s;
+    }
+    .fan-form input:focus {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+    }
+    .fan-form input::placeholder { color: #555; }
+    .fan-form button {
+      padding: 14px;
+      background: #fff;
+      color: #0a0a0a;
+      border: none;
+      font-family: 'Nosifer', serif;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: uppercase;
+    }
+    .fan-form button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(255,255,255,0.05);
+    }
+    .fan-status { margin-top: 16px; font-size: 0.9rem; min-height: 1.4em; }
+    .fan-status.success { color: #8bc34a; }
+    .fan-status.error { color: #ef5350; }
+    .fan-count { margin-top: 12px; font-size: 0.85rem; color: #555; letter-spacing: 2px; }
+
+    @media (max-width: 768px) {
+      .fan-section { padding: 60px 20px; }
     }
 
     .sound-toggle {
@@ -346,6 +410,22 @@
     </div>
   </section>
 
+  <section class="fan-section">
+    <div class="container">
+      <h2 class="section-title" style="font-family:'Cinzel Decorative',serif;font-size:2.2rem;text-align:center;color:#fff;letter-spacing:5px;margin-bottom:40px;">Join the JXEEZ</h2>
+      <div class="fan-card">
+        <p>Drop your number to stay connected. No spam — just updates on new music, drops, and everything Jx Yvng.</p>
+        <form class="fan-form" id="fanForm">
+          <input type="text" id="fanName" placeholder="Your name" required autocomplete="name">
+          <input type="tel" id="fanPhone" placeholder="Phone number" required autocomplete="tel">
+          <button type="submit">Join</button>
+        </form>
+        <p class="fan-status" id="fanStatus"></p>
+        <div class="fan-count" id="fanCount"></div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p>&copy; 2026 Jx Yvng — JXEEZ</p>
   </footer>
@@ -390,6 +470,47 @@
         document.body.style.overflow = '';
       });
     });
+
+    const fanForm = document.getElementById('fanForm');
+    const fanStatus = document.getElementById('fanStatus');
+    const fanCount = document.getElementById('fanCount');
+    async function updateFanCount() {
+      try {
+        const r = await fetch('/api/fans');
+        const d = await r.json();
+        fanCount.textContent = d.count > 0 ? `${d.count} JXEEZ joined` : '';
+      } catch {}
+    }
+    updateFanCount();
+    if (fanForm) {
+      fanForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('fanName').value.trim();
+        const phone = document.getElementById('fanPhone').value.trim();
+        fanStatus.className = 'fan-status';
+        fanStatus.textContent = 'Joining...';
+        try {
+          const r = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, phone })
+          });
+          const d = await r.json();
+          if (d.success) {
+            fanStatus.className = 'fan-status success';
+            fanStatus.textContent = "You're in. Welcome to the JXEEZ.";
+            fanForm.reset();
+            updateFanCount();
+          } else {
+            fanStatus.className = 'fan-status error';
+            fanStatus.textContent = d.error || 'Something went wrong.';
+          }
+        } catch {
+          fanStatus.className = 'fan-status error';
+          fanStatus.textContent = 'Could not connect. Try again.';
+        }
+      });
+    }
   </script>
 </body>
 </html>
