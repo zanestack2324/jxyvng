@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jx Yvng — Official</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="FACELESS.jpeg" fetchpriority="high">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=MedievalSharp&family=Uncial+Antiqua&family=Nosifer&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'MedievalSharp', serif;
+      background: #0a0a0a;
+      color: #d4d4d4;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 4px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, transparent 2px, transparent 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 12px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      z-index: 1000;
+      transition: 0.3s;
+    }
+    nav .logo-link {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    nav .logo {
+      height: 50px;
+      transition: 0.3s;
+      filter: grayscale(0.3) brightness(1.2);
+    }
+    nav .logo-link:hover .logo {
+      transform: scale(1.05);
+      filter: grayscale(0) brightness(1.4) drop-shadow(0 0 16px rgba(255,255,255,0.15));
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    nav ul li a {
+      font-family: 'Nosifer', serif;
+      color: #888;
+      text-decoration: none;
+      font-size: 1.15rem;
+      letter-spacing: 2px;
+      position: relative;
+      padding: 6px 0;
+      transition: 0.3s;
+      text-transform: uppercase;
+    }
+    nav ul li a:hover {
+      color: #fff;
+      text-shadow:
+        0 0 10px rgba(255,100,0,0.6),
+        0 0 30px rgba(255,50,0,0.4),
+        0 0 60px rgba(255,0,0,0.2);
+      transform: scale(1.08);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 1001;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: #aaa;
+      transition: 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('FACELESS.jpeg') center center / cover no-repeat;
+      transform: scale(1);
+      will-change: transform;
+      z-index: 1;
+      filter: grayscale(0.85) contrast(1.35) brightness(0.7);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.75) 80%, #000 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.5) 0%, transparent 35%, transparent 60%, rgba(0,0,0,0.7) 100%);
+      z-index: 2;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      padding: 40px;
+    }
+    .hero-content h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 5.5rem;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 0 30px rgba(255,255,255,0.08), 0 0 80px rgba(0,0,0,0.6), 4px 4px 0 #000;
+      letter-spacing: 10px;
+      margin-bottom: 10px;
+      animation: flicker 4s infinite alternate;
+    }
+    .hero-content .sub {
+      font-size: 1.4rem;
+      letter-spacing: 8px;
+      color: #aaa;
+      text-shadow: 0 0 40px rgba(0,0,0,0.6);
+      margin-bottom: 24px;
+      font-family: 'Uncial Antiqua', serif;
+    }
+    .hero-content .tagline {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #777;
+      letter-spacing: 4px;
+      margin-bottom: 40px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 52px;
+      font-family: 'Nosifer', serif;
+      font-size: 1rem;
+      letter-spacing: 4px;
+      color: #fff;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      transition: 0.4s;
+    }
+    .btn:hover {
+      background: #fff;
+      color: #0a0a0a;
+      border-color: #fff;
+      box-shadow: 0 0 40px rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+    }
+    .btn:active { transform: translateY(1px); }
+
+    @keyframes flicker {
+      0%, 19%, 23%, 26%, 54%, 58%, 100% { opacity: 1; }
+      21%, 25%, 56% { opacity: 0.5; }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #555;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      animation: bob 2s infinite;
+    }
+    .scroll-indicator .line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, #555, transparent);
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    .hero-socials {
+      position: absolute;
+      bottom: 90px;
+      right: 40px;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .hero-socials a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.3s;
+      text-decoration: none;
+    }
+    .hero-socials a:hover {
+      transform: scale(1.15);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .hero-socials a svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    section {
+      padding: 120px 40px;
+      position: relative;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 2.8rem;
+      text-align: center;
+      color: #fff;
+      letter-spacing: 6px;
+      margin-bottom: 60px;
+      position: relative;
+      text-shadow: 0 0 40px rgba(255,255,255,0.04);
+    }
+    .section-title::after {
+      content: '✧';
+      display: block;
+      font-size: 1rem;
+      color: #666;
+      margin-top: 14px;
+      letter-spacing: 0;
+    }
+
+    .bio {
+      position: relative;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+    .bio::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('DARK MIC YX.jpeg') center center / cover no-repeat fixed;
+      opacity: 0.15;
+      z-index: 0;
+      filter: grayscale(1) contrast(1.3);
+    }
+    .bio > .container {
+      position: relative;
+      z-index: 1;
+    }
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .bio-image-wrap {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 20px 80px rgba(0,0,0,0.8);
+    }
+    .bio-image-wrap img {
+      width: 100%;
+      height: 600px;
+      object-fit: cover;
+      display: block;
+      will-change: transform;
+      filter: grayscale(0.7) contrast(1.3) brightness(0.85);
+      transition: transform 0.8s ease;
+    }
+    .bio-image-wrap:hover img { transform: scale(1.06); }
+    .bio-text {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .bio-text h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 2.2rem;
+      color: #fff;
+      letter-spacing: 4px;
+    }
+    .bio-text .artist-name {
+      font-size: 1.1rem;
+      color: #888;
+      letter-spacing: 2px;
+    }
+    .bio-text p {
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: #b0b0b0;
+      letter-spacing: 0.3px;
+    }
+    .bio-text .highlight {
+      color: #fff;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(255,255,255,0.06);
+    }
+    .bio-text .signoff {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #999;
+      letter-spacing: 3px;
+    }
+
+    .links-section {
+      position: relative;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+    .links-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('HERO 1.jpeg') center center / cover no-repeat fixed;
+      opacity: 0.1;
+      z-index: 0;
+      filter: grayscale(1) contrast(1.2);
+    }
+    .links-section > .container {
+      position: relative;
+      z-index: 1;
+    }
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px 24px;
+      color: #ccc;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.3s;
+      font-size: 0.95rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.02);
+      font-family: 'Nosifer', serif;
+    }
+    .link-card:hover {
+      background: #fff;
+      color: #0a0a0a;
+      border-color: #fff;
+      transform: translateY(-3px) scale(1.02);
+    }
+    .link-card svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .music {
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+    .music::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('HERO 1.jpeg') center center / cover no-repeat fixed;
+      opacity: 0.1;
+      z-index: 0;
+      filter: grayscale(1) contrast(1.2);
+    }
+    .music > .container {
+      position: relative;
+      z-index: 1;
+    }
+    .spotify-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .spotify-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 50px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: 0.4s;
+    }
+    .spotify-wrap:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 70px rgba(255,255,255,0.03);
+    }
+
+    .gallery {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .gallery-grid img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: 0.5s;
+      filter: grayscale(0.8) contrast(1.2) brightness(0.85);
+    }
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+      filter: grayscale(0) contrast(1) brightness(1);
+      box-shadow: 0 10px 50px rgba(0,0,0,0.7);
+    }
+
+    footer {
+      padding: 80px 40px 40px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+      background: url('HERO 1.jpeg') center center / cover no-repeat fixed;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 0;
+    }
+    footer > * {
+      position: relative;
+      z-index: 1;
+    }
+    footer .socials {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+    footer .socials a {
+      color: #666;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      text-decoration: none;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-family: 'Nosifer', serif;
+    }
+    footer .socials a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,100,0,0.6), 0 0 30px rgba(255,50,0,0.3);
+    }
+    footer .watermark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      color: #555;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+    footer .watermark img {
+      height: 28px;
+      filter: grayscale(0.5) brightness(0.8);
+      opacity: 0.6;
+    }
+    footer .watermark span {
+      font-family: 'Nosifer', serif;
+      color: #555;
+      letter-spacing: 2px;
+    }
+    footer p {
+      color: #444;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      margin-top: 15px;
+    }
+    .footer-brand {
+      font-family: 'Nosifer', serif;
+      font-size: 1.3rem;
+      color: #555;
+      letter-spacing: 6px;
+      margin-bottom: 15px;
+    }
+
+    .reveal { opacity: 0; transform: translateY(60px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(60px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+    .parallax-divider {
+      height: 40vh;
+      background: url('FACELESS.jpeg') center center / cover no-repeat fixed;
+      position: relative;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      filter: grayscale(0.8) contrast(1.3) brightness(0.65);
+    }
+    .parallax-divider .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .parallax-divider .overlay span {
+      font-family: 'Nosifer', serif;
+      font-size: 1.8rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 10px;
+      text-shadow: 0 0 40px rgba(0,0,0,0.5);
+      transition: 0.3s;
+    }
+    .parallax-divider:hover .overlay span {
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255,100,0,0.4), 0 0 40px rgba(255,50,0,0.2);
+    }
+
+    .sound-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 9998;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(10,10,10,0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #aaa;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+    .sound-toggle:hover {
+      background: #fff;
+      color: #0a0a0a;
+      border-color: #fff;
+    }
+
+    @media (min-width: 769px) and (max-width: 900px) {
+      nav ul li a { font-size: 0.85rem; letter-spacing: 1px; }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 260px;
+        height: 100vh;
+        flex-direction: column;
+        background: rgba(10,10,10,0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 100px 40px 40px;
+        gap: 26px;
+        transition: 0.4s ease;
+        border-left: 1px solid rgba(255,255,255,0.04);
+      }
+      nav ul.open { right: 0; }
+      nav ul li a { font-size: 1.3rem; letter-spacing: 2px; }
+      nav ul li a:hover { transform: scale(1.05); }
+      nav ul li {
+        opacity: 0;
+        transform: translateX(30px);
+        transition: 0.4s ease;
+      }
+      nav ul.open li { opacity: 1; transform: translateX(0); }
+      nav ul.open li:nth-child(1) { transition-delay: 0.05s; }
+      nav ul.open li:nth-child(2) { transition-delay: 0.1s; }
+      nav ul.open li:nth-child(3) { transition-delay: 0.15s; }
+      nav ul.open li:nth-child(4) { transition-delay: 0.2s; }
+      nav ul.open li:nth-child(5) { transition-delay: 0.25s; }
+
+      .hero-socials { right: 20px; bottom: 90px; gap: 12px; }
+      .hero-socials a { width: 38px; height: 38px; }
+      .hero-socials a svg { width: 18px; height: 18px; }
+
+      .bio-grid { grid-template-columns: 1fr; gap: 40px; }
+      .bio-image-wrap img { height: 380px; }
+      .hero-content h1 { font-size: 2.8rem; letter-spacing: 5px; }
+      .hero-content .sub { font-size: 1rem; letter-spacing: 5px; }
+      .section-title { font-size: 2rem; }
+      .bio-text h2 { font-size: 1.8rem; }
+      nav { padding: 10px 20px; }
+      nav .logo { height: 38px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid img { height: 220px; }
+      .links-grid { grid-template-columns: 1fr; }
+      .spotify-grid { grid-template-columns: 1fr; }
+      section { padding: 70px 20px; }
+      footer { padding: 60px 20px 30px; background-attachment: scroll; }
+      .bio::before { background-attachment: scroll; }
+      .links-section::before { background-attachment: scroll; }
+      .music::before { background-attachment: scroll; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content h1 { font-size: 2rem; letter-spacing: 3px; }
+      .hero-content .sub { font-size: 0.8rem; letter-spacing: 3px; }
+      .hero-socials { right: 14px; bottom: 80px; gap: 10px; }
+      .hero-socials a { width: 34px; height: 34px; }
+      .hero-socials a svg { width: 16px; height: 16px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-grid img { height: 260px; }
+      footer .socials { gap: 20px; }
+      .footer-brand { font-size: 1rem; }
+      footer .socials a { font-size: 0.7rem; }
+      .parallax-divider .overlay span { font-size: 1.1rem; letter-spacing: 5px; }
+      .section-title { font-size: 1.6rem; }
+      .bio-text h2 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="sound-toggle" id="soundToggle" aria-label="Toggle background sound">&#9835;</button>
+
+  <audio id="bgAudio" loop preload="none">
+    <source src="BG SOUND.mp3" type="audio/mpeg">
+  </audio>
+
+  <nav>
+    <a href="#home" class="logo-link" onclick="playClick()">
+      <img src="name logo.png" alt="Jx Yvng" class="logo">
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="navMenu">
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#bio" class="nav-link">Story</a></li>
+      <li><a href="#music" class="nav-link">Music</a></li>
+      <li><a href="#links" class="nav-link">Links</a></li>
+      <li><a href="#gallery" class="nav-link">Gallery</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>JX&nbsp;YVNG</h1>
+      <div class="sub">The Movement</div>
+      <div class="tagline">"Turning emotions into timeless music."</div>
+      <a href="https://open.spotify.com/artist/3ELdsqqawdByWKMF92AHPd" target="_blank" class="btn" onclick="playClick()">Listen Now</a>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+    <div class="hero-socials">
+      <a href="https://open.spotify.com/artist/3ELdsqqawdByWKMF92AHPd" target="_blank" onclick="playClick()" aria-label="Spotify">
+        <svg viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      </a>
+      <a href="https://music.apple.com/zm/artist/jx-yvng/1792371256" target="_blank" onclick="playClick()" aria-label="Apple Music">
+        <svg viewBox="0 0 24 24" fill="url(#appleGrad)"><defs><linearGradient id="appleGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fb5c74"/><stop offset="100%" stop-color="#fa233b"/></linearGradient></defs><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.08 16.68c-.24.36-.48.72-.78 1.08-.42.48-.84.96-1.56 1.02-.72.06-1.02-.42-1.62-.42-.6 0-.96.42-1.56.48-.6.06-1.08-.36-1.5-.84-.78-.9-1.38-1.98-1.56-3.24-.18-1.14-.06-2.28.36-3.3.36-.9.96-1.68 1.74-2.16.66-.42 1.38-.66 2.1-.66.66 0 1.26.3 1.86.3.54 0 1.44-.36 2.4-.3.42 0 .84.12 1.2.36-.3.24-.54.54-.72.9-.24.48-.36 1.02-.3 1.56.06.78.36 1.5.84 2.1.42.48.96.9 1.56 1.2-.18.54-.42 1.08-.78 1.56z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/jx_yvng/" target="_blank" onclick="playClick()" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="url(#instaGrad)"><defs><linearGradient id="instaGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#feda75"/><stop offset="25%" stop-color="#fa7e1e"/><stop offset="50%" stop-color="#d62976"/><stop offset="75%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@jx_yvng7" target="_blank" onclick="playClick()" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="bio" id="bio">
+    <div class="container">
+      <h2 class="section-title reveal">The Story</h2>
+      <div class="bio-grid">
+        <div class="bio-image-wrap reveal-left" data-parallax="-0.08">
+          <img src="BIOGRAPHY.jpeg" alt="Jx Yvng" loading="lazy">
+        </div>
+        <div class="bio-text reveal-right">
+          <h2>Jx Yvng</h2>
+          <p class="artist-name">Ogheneaga Joy Eguono · 18 · Warri, Delta State</p>
+          <p>My name is <strong>Ogheneaga Joy Eguono</strong>, professionally known as <span class="highlight">Jx Yvng</span>. I'm an 18-year-old artist from Warri, Delta State, Nigeria, born on February 12, 2008.</p>
+          <p>I'm a versatile musician, but my sound is deeply rooted in <span class="highlight">Emotional Rap</span>, where I transform real-life experiences, pain, growth, and personal struggles into music that connects with people on a deeper level.</p>
+          <p>My breakthrough came on TikTok with the release of <span class="highlight">"Broken In My Prime"</span>, a song that resonated with thousands of listeners and helped me gain recognition across the platform. Through consistency, creativity, and daily content, I've continued to build a strong and loyal community of supporters.</p>
+          <p>My fanbase is known as the <span class="highlight">JXEEZ</span> — a family of believers who support not only my music but also the vision, dream, and future we're building together. They're called Believers because they believe in me, my journey, and the impact we're destined to make.</p>
+          <p><em>This is more than music — it's a movement, a story, and a family growing stronger every day.</em></p>
+          <div class="signoff">Jx Yvng</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="parallax-divider">
+    <div class="overlay">
+      <span>"Turning emotions into timeless music."</span>
+    </div>
+  </div>
+
+  <section class="links-section" id="links">
+    <div class="container">
+      <h2 class="section-title reveal">Connect</h2>
+      <div class="links-grid">
+        <a href="https://open.spotify.com/artist/3ELdsqqawdByWKMF92AHPd" target="_blank" class="link-card reveal-scale" onclick="playClick()">
+          <svg viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Spotify
+        </a>
+        <a href="https://music.apple.com/zm/artist/jx-yvng/1792371256" target="_blank" class="link-card reveal-scale" onclick="playClick()">
+          <svg viewBox="0 0 24 24" fill="url(#appleGrad2)"><defs><linearGradient id="appleGrad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fb5c74"/><stop offset="100%" stop-color="#fa233b"/></linearGradient></defs><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.08 16.68c-.24.36-.48.72-.78 1.08-.42.48-.84.96-1.56 1.02-.72.06-1.02-.42-1.62-.42-.6 0-.96.42-1.56.48-.6.06-1.08-.36-1.5-.84-.78-.9-1.38-1.98-1.56-3.24-.18-1.14-.06-2.28.36-3.3.36-.9.96-1.68 1.74-2.16.66-.42 1.38-.66 2.1-.66.66 0 1.26.3 1.86.3.54 0 1.44-.36 2.4-.3.42 0 .84.12 1.2.36-.3.24-.54.54-.72.9-.24.48-.36 1.02-.3 1.56.06.78.36 1.5.84 2.1.42.48.96.9 1.56 1.2-.18.54-.42 1.08-.78 1.56z"/></svg>
+          Apple Music
+        </a>
+        <a href="https://www.instagram.com/jx_yvng/" target="_blank" class="link-card reveal-scale" onclick="playClick()">
+          <svg viewBox="0 0 24 24" fill="url(#instaGrad2)"><defs><linearGradient id="instaGrad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#feda75"/><stop offset="25%" stop-color="#fa7e1e"/><stop offset="50%" stop-color="#d62976"/><stop offset="75%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.tiktok.com/@jx_yvng7" target="_blank" class="link-card reveal-scale" onclick="playClick()">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          TikTok
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="music" id="music">
+    <div class="container">
+      <h2 class="section-title reveal">Listen</h2>
+      <div class="spotify-grid">
+        <div class="spotify-wrap reveal">
+          <iframe src="https://open.spotify.com/embed/track/37A4XJNNNbGn7iOcClNegs?utm_source=generator&si=5461bde43a1745f5" width="100%" height="352" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Track"></iframe>
+        </div>
+        <div class="spotify-wrap reveal">
+          <iframe src="https://open.spotify.com/embed/artist/3ELdsqqawdByWKMF92AHPd?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Artist"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <h2 class="section-title reveal">Gallery</h2>
+      <div class="gallery-grid">
+        <img src="7 OCLOCK.jpeg" alt="7 O'Clock" class="reveal-scale" data-parallax="0.05" loading="lazy">
+        <img src="BROKEN IN MY PRIME SINGLE.jpeg" alt="Broken In My Prime" class="reveal-scale" data-parallax="-0.04" loading="lazy">
+        <img src="CRAXY COMEBACK.jpeg" alt="Craxy Comeback" class="reveal-scale" data-parallax="0.06" loading="lazy">
+        <img src="DARK MIC YX.jpeg" alt="Dark Mic" class="reveal-scale" data-parallax="-0.05" loading="lazy">
+        <img src="LOVE ME LIKE ILY.jpeg" alt="Love Me Like ILY" class="reveal-scale" data-parallax="0.04" loading="lazy">
+        <img src="ROCAFELLA.jpeg" alt="Rocafella" class="reveal-scale" data-parallax="-0.06" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">JX YVNG</div>
+    <div class="socials">
+      <a href="https://www.instagram.com/jx_yvng/" target="_blank" onclick="playClick()">Instagram</a>
+      <a href="https://www.tiktok.com/@jx_yvng7" target="_blank" onclick="playClick()">TikTok</a>
+      <a href="https://open.spotify.com/artist/3ELdsqqawdByWKMF92AHPd" target="_blank" onclick="playClick()">Spotify</a>
+      <a href="https://music.apple.com/zm/artist/jx-yvng/1792371256" target="_blank" onclick="playClick()">Apple Music</a>
+    </div>
+    <div class="watermark">
+      <img src="WATER MARK.png" alt="ZANEDEV" loading="lazy">
+      <span>ZANEDEV</span>
+    </div>
+    <p>&copy; 2026 Jx Yvng — JXEEZ</p>
+  </footer>
+
+  <script>
+    const clickAudio = new Audio('CLICK SOUND.mp3');
+    clickAudio.volume = 0.5;
+    function playClick() {
+      clickAudio.currentTime = 0;
+      clickAudio.play().catch(() => {});
+    }
+
+    document.querySelectorAll('.btn, .nav-link, .link-card, footer .socials a, .logo-link, .hero-socials a').forEach(el => {
+      el.addEventListener('click', playClick);
+    });
+
+    const heroBg = document.getElementById('heroBg');
+    const hero = document.querySelector('.hero');
+    function updateHeroZoom() {
+      const rect = hero.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / (rect.height - viewH)));
+      heroBg.style.transform = `scale(${1 + progress * 0.35})`;
+    }
+    window.addEventListener('scroll', updateHeroZoom, { passive: true });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
+
+    const nv = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nv.style.borderBottomColor = window.scrollY > 50 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.04)';
+    }, { passive: true });
+
+    const bgAudio = document.getElementById('bgAudio');
+    bgAudio.volume = 0.25;
+    let soundOn = false;
+    const soundToggle = document.getElementById('soundToggle');
+    soundToggle.addEventListener('click', () => {
+      playClick();
+      if (soundOn) { bgAudio.pause(); soundToggle.innerHTML = '&#9835;'; soundOn = false; }
+      else { bgAudio.play().then(() => { soundToggle.innerHTML = '&#9834;'; soundOn = true; }).catch(() => { soundToggle.innerHTML = '&#9835;'; soundOn = false; }); }
+    });
+    document.addEventListener('click', function startAudio() {
+      if (!soundOn) { bgAudio.play().then(() => { soundToggle.innerHTML = '&#9834;'; soundOn = true; }).catch(() => {}); }
+      document.removeEventListener('click', startAudio);
+    }, { once: true });
+
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('open');
+      document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    document.querySelectorAll('[data-parallax]').forEach(el => {
+      const speed = parseFloat(el.getAttribute('data-parallax'));
+      function updateParallax() {
+        const rect = el.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const viewCenter = window.innerHeight / 2;
+        const offset = (center - viewCenter) * speed;
+        if (el.tagName === 'IMG') { el.style.objectPosition = `50% ${50 + offset}%`; }
+        else { el.style.transform = `translateY(${offset}px)`; }
+      }
+      if (el.classList.contains('reveal') || el.classList.contains('reveal-left') || el.classList.contains('reveal-right') || el.classList.contains('reveal-scale')) {
+        const o = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { window.addEventListener('scroll', updateParallax, { passive: true }); o.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        o.observe(el);
+      } else {
+        window.addEventListener('scroll', updateParallax, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>
