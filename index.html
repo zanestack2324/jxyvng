@@ -833,16 +833,42 @@
   </footer>
 
   <script>
+    const bgAudio = document.getElementById('bgAudio');
+    bgAudio.volume = 0.25;
+    let soundOn = false;
+    const soundToggle = document.getElementById('soundToggle');
+
     const clickAudio = new Audio('CLICK SOUND.mp3');
     clickAudio.volume = 0.5;
-    function playClick() {
-      clickAudio.currentTime = 0;
-      clickAudio.play().catch(() => {});
+
+    function toggleBgSound() {
+      if (soundOn) {
+        bgAudio.pause();
+        soundToggle.innerHTML = '&#9835;';
+        soundOn = false;
+      } else {
+        bgAudio.play().then(() => {
+          clickAudio.currentTime = 0;
+          clickAudio.play().catch(() => {});
+          soundToggle.innerHTML = '&#9834;';
+          soundOn = true;
+        }).catch(() => {});
+      }
     }
 
     document.querySelectorAll('.btn, .nav-link, .link-card, footer .socials a, .logo-link, .hero-socials a').forEach(el => {
-      el.addEventListener('click', playClick);
+      el.addEventListener('click', toggleBgSound);
     });
+
+    soundToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleBgSound();
+    });
+
+    document.addEventListener('click', function startAudio() {
+      if (!soundOn) { bgAudio.play().then(() => { soundToggle.innerHTML = '&#9834;'; soundOn = true; }).catch(() => {}); }
+      document.removeEventListener('click', startAudio);
+    }, { once: true });
 
     const heroBg = document.getElementById('heroBg');
     const hero = document.querySelector('.hero');
@@ -867,20 +893,6 @@
     window.addEventListener('scroll', () => {
       nv.style.borderBottomColor = window.scrollY > 50 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.04)';
     }, { passive: true });
-
-    const bgAudio = document.getElementById('bgAudio');
-    bgAudio.volume = 0.25;
-    let soundOn = false;
-    const soundToggle = document.getElementById('soundToggle');
-    soundToggle.addEventListener('click', () => {
-      playClick();
-      if (soundOn) { bgAudio.pause(); soundToggle.innerHTML = '&#9835;'; soundOn = false; }
-      else { bgAudio.play().then(() => { soundToggle.innerHTML = '&#9834;'; soundOn = true; }).catch(() => { soundToggle.innerHTML = '&#9835;'; soundOn = false; }); }
-    });
-    document.addEventListener('click', function startAudio() {
-      if (!soundOn) { bgAudio.play().then(() => { soundToggle.innerHTML = '&#9834;'; soundOn = true; }).catch(() => {}); }
-      document.removeEventListener('click', startAudio);
-    }, { once: true });
 
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
